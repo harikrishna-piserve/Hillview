@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.assignation.field_returned_on
+  module:
+    - asset_management
+    - datetime
+id: assignation.assignation.field_returned_on
+field_name: field_returned_on
+entity_type: assignation
+bundle: assignation
+label: 'Returned On'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

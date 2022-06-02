@@ -1,0 +1,29 @@
+name: 'Asset Management'
+type: module
+description: 'Asset management module'
+package: Custom
+core_version_requirement: '^8 || ^9'
+dependencies:
+  - block
+  - datetime
+  - 'drupal:block'
+  - 'drupal:datetime'
+  - 'drupal:field'
+  - 'drupal:image'
+  - 'drupal:options'
+  - 'drupal:system'
+  - 'drupal:user'
+  - 'drupal:views'
+  - field
+  - 'form_mode_manager:form_mode_manager'
+  - options
+  - system
+  - taxonomy
+  - user
+  - views
+  - webform
+  - views_bulk_operations
+  - 'views_bulk_operations:views_bulk_operations'
+  - 'views_conditional:views_conditional'
+core_incompatible: false
+core: 8.x

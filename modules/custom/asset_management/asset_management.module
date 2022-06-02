@@ -1,0 +1,324 @@
+<?php
+
+/**
+ * @file
+ * Contains asset_management.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_help().
+ */
+function asset_management_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the asset_management module.
+    case 'help.page.asset_management':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('My Awesome Module') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_assignation_presave().
+ */
+function asset_management_assignation_presave(\Drupal\Core\Entity\EntityInterface $entity) {
+  
+  if ($entity->getStatus()=='assigned') {
+    $entity->setAssetStatus('assigned');
+    }
+    if ($entity->getStatus()=='closed') {
+    $entity->setAssetStatus('open');
+    }
+    if(!empty($entity->id()))
+    {
+      if($entity->original->asset_id->target_id != $entity->asset_id->target_id)
+      {
+        $entity->original->setAssetStatus('open');
+      }
+    }  
+    
+}
+
+
+
+/**
+ * Implements hook_theme().
+ */
+function asset_management_theme() {
+  $theme = [];
+  $theme['asset'] = [
+    'render element' => 'elements',
+    'file' => 'asset.page.inc',
+    'template' => 'asset',
+  ];
+  $theme['asset_content_add_list'] = [
+    'render element' => 'content',
+    'variables' => ['content' => NULL],
+    'file' => 'asset.page.inc',
+  ];
+  return $theme;
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK().
+ */
+function asset_management_theme_suggestions_asset(array $variables) {
+  $suggestions = [];
+  $entity = $variables['elements']['#asset'];
+  $sanitized_view_mode = strtr($variables['elements']['#view_mode'], '.', '_');
+
+  $suggestions[] = 'asset__' . $sanitized_view_mode;
+  $suggestions[] = 'asset__' . $entity->bundle();
+  $suggestions[] = 'asset__' . $entity->bundle() . '__' . $sanitized_view_mode;
+  $suggestions[] = 'asset__' . $entity->id();
+  $suggestions[] = 'asset__' . $entity->id() . '__' . $sanitized_view_mode;
+  return $suggestions;
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function asset_management_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+  // dpm($form);
+  // $form['assignation_flag']['#access'] = FALSE;
+  // $form['user_id']['#access'] = FALSE;
+  // $form['revision_log_message']['#access'] = FALSE;
+  // $form['new_revision']['#access'] = FALSE;
+  
+  
+  if($form['#form_id'] == 'assignation_add_form')
+  {
+    $assetids = \Drupal::entityQuery('asset')->condition('asset_status','open')->execute();
+    $assetss =  \Drupal\asset_management\Entity\Asset::loadMultiple($assetids);
+    // dpm($assetids);
+    // dpm($assetss);
+    //dpm($form);
+
+    $options= [
+      '_none' => '-None-'
+    ];
+    foreach ($assetss as $assetid => $asset) {
+      $options[$assetid] = $asset->getName();
+      
+    }
+    if(!empty($form['asset_id']['widget']['#default_value'][0]) )
+    {
+
+      $asset =  \Drupal\asset_management\Entity\Asset::load($form['asset_id']['widget']['#default_value'][0]);
+      $options[$form['asset_id']['widget']['#default_value'][0]] = $asset->getName();
+      //dpm($form['asset_id']['widget']['#default_value']   );
+    }
+
+    $form['asset_id']['widget']['#options'] = $options;
+    
+    //dpm($options);
+    
+    
+    //return $assetss;
+    $form['created']['#access'] = 0;
+    $form['assignation_flag']['#access'] = FALSE;
+    $form['user_id']['#access'] = FALSE;
+    $form['revision_log_message']['#access'] = FALSE;
+    $form['new_revision']['#access'] = FALSE;
+
+    if($form['assignation_flag']['widget'][0]['value']['#default_value'] == 0)
+    {
+      // dpm($form['request_comment']['#access']);
+      $form['request_comment']['#access'] = FALSE;
+      $form['assignation_flag']['#access'] = FALSE;
+    }
+  }
+
+  if($form['#form_id'] == 'repair_request_form')
+  { 
+    //dpm($form);
+    $current_user = \Drupal::currentUser()->id();
+    $assetids = \Drupal::entityQuery('assignation')->condition('assignation_status','assigned')->condition('assignee',$current_user)->execute();
+    //dpm($assetids);
+
+    $assetss =  \Drupal\asset_management\Entity\Assignation::loadMultiple($assetids);
+    // dpm($assetss);
+    $options= [
+      '_none' => '-None-'
+    ];
+    foreach($assetss as $assets => $asset)
+    {
+      //dpm($asset->get('asset_id')->getValue()[0]['target_id']);
+      $options[$asset->get('asset_id')->getValue()[0]['target_id']] = \Drupal\asset_management\Entity\Asset::load($asset->get('asset_id')->getValue()[0]['target_id'])->getName();
+      
+    }
+    
+
+    $form['asset_name']['#options'] = $options;
+    
+    
+    $form['created']['#access'] = 0;
+  }
+
+  if($form['#form_id'] == 'request_form')
+  {
+   $asset_types = \Drupal::entityQuery('asset_type')->execute();
+    // dpm($asset_types);
+    $options= [
+      '_none' => '-None-'
+    ];
+    foreach($asset_types as $asset_type => $name)
+    {
+      //dpm($asset->get('asset_id')->getValue()[0]['target_id']);
+      $options[$asset_type] = $name;
+      
+    }
+    $form['asset_type']['#options'] = $options;
+    $form['created']['#access'] = 0;
+  }
+
+  if($form['#form_id'] == 'assignation_edit_form')
+  {
+    $form['user_id']['#access'] = FALSE;
+    $form['revision_log_message']['#access'] = FALSE;
+    $form['new_revision']['#access'] = FALSE;
+    if($form['assignation_flag']['widget'][0]['value']['#default_value'] == 0)
+    {
+      // dpm($form['request_comment']['#access']);
+      $form['request_comment']['#access'] = FALSE;
+      $form['assignation_flag']['#access'] = FALSE;
+    }
+
+    if($form['assignation_flag']['widget'][0]['value']['#default_value'] == 1)
+    {
+      // dpm($form['request_comment']['#access']);
+      
+      $form['assignation_flag']['#access'] = FALSE;
+    }
+    // dpm($form['request_comment']['#access']);
+
+    
+  } 
+
+  if ($form['#form_id'] == 'assignation_add_form'|| $form['#form_id'] == 'assignation_edit_form') {
+
+    //add wrapper to select 2
+    $form['asset_id']['#prefix'] = '<div id="select2-wrapper">';
+    $form['asset_id']['#suffix'] = '</div>';
+
+    $form['asset_type']['widget']['#ajax'] = [
+      'callback' => 'callback_asset_type_trigger',
+      'wrapper' => 'select2-wrapper',
+      'event' => 'change',
+      'progress' => [
+        'type' => 'throbber',
+        'message' => t('Fetching content...'),
+      ],
+    ];
+
+    $field_select1_value = $form_state->getValue('asset_type');
+    if ($form['#form_id'] == 'assignation_edit_form' && !$field_select1_value) {
+      $field_select1_edit_value = isset($form['asset_type']['widget']['#default_value'][0]) ? $form['asset_type']['widget']['#default_value'][0] : null;
+      if(!empty($form['asset_id']['widget']['#default_value'][0]) )
+      {
+        //dpm($form['asset_id']['widget']['#default_value'][0]);
+
+        $asset =  \Drupal\asset_management\Entity\Asset::load($form['asset_id']['widget']['#default_value'][0]);
+        $options[$form['asset_id']['widget']['#default_value'][0]] = $asset->getName();
+        // dpm($options);
+        $option1 = $asset->getName();
+        $form['asset_id']['widget']['#options'] = getSelect2OptionsEdit($field_select1_edit_value,$option1);
+      }
+      else{
+        $form['asset_id']['widget']['#options'] = getSelect2Options($field_select1_edit_value);
+      }
+    }
+    
+  }  
+
+  if($form['#form_id'] == ('maintenance_record_add_form' || 'vendor_record_add_form' || 'vendor_record_edit_form' || 'maintenance_record_edit_form'))
+  {
+    $name = \Drupal::request()->query->get('name');
+    if ($name != NULL) {
+      $form['name']['widget'][0]['target_id']['#default_value'] = \Drupal\asset_management\Entity\Asset::load($name);
+    }
+    $form['user_id']['#access'] = FALSE;
+    $form['revision_log_message']['#access'] = FALSE;
+    $form['new_revision']['#access'] = FALSE;
+  }  
+
+  // if(str_starts_with($form['#form_id'],'asset_') && str_ends_with($form['#form_id'],'_form'))
+  // {
+  //   $form['user_id']['#access'] = FALSE;
+  //   $form['revision_log_message']['#access'] = FALSE;
+  //   $form['new_revision']['#access'] = FALSE;
+  // }
+  
+}
+
+/**
+ * @param array $form
+ * @param $form_state
+ * @return mixed
+ */
+
+function callback_asset_type_trigger(&$form, \Drupal\Core\Form\FormStateInterface $form_state)
+{
+  $field_select1_value = $form_state->getValue('asset_type');
+  // dpm($field_select1_value);
+  if (!empty($field_select1_value)) {
+    $select1_value = $field_select1_value[0]['target_id'];
+    // dpm($select1_value);
+    $form['asset_id']['widget']['#options'] = getSelect2Options($select1_value);
+  } 
+  return $form['asset_id'];
+}
+
+
+/**
+ * @param $select1_value
+ * @return array
+ */
+
+function getSelect2Options($select1_value)
+{
+  $query = \Drupal::entityQuery('asset');
+  $query->condition('type', $select1_value);
+  $query->condition('asset_status', 'open');
+  $tids = $query->execute();
+  // dpm($tids);
+  $terms = \Drupal\asset_management\Entity\Asset::loadMultiple($tids);
+  $options = [];
+  $options['_none'] = t('- Any -');
+  foreach ($terms as $key => $term) {
+    $options[$key] = $term->name->value;
+  }
+  return $options;
+}
+
+function getSelect2OptionsEdit($select1_value, $option1)
+{
+  $query = \Drupal::entityQuery('asset');
+  $query->condition('type', $select1_value);
+  $query->condition('asset_status', 'open');
+  $tids = $query->execute();
+  // dpm($tids);
+  
+  $terms = \Drupal\asset_management\Entity\Asset::loadMultiple($tids);
+  $options = [];
+  $options[0] = $option1;
+  foreach ($terms as $key => $term) {
+    $options[$key] = $term->name->value;
+  }
+  // dpm($options);
+  return $options;
+}
+
+function asset_management_preprocess_asset(&$variables) {
+  $variables['id'] = $variables['elements']['#asset']->id();
+  $variables['title'] = $variables['elements']['#asset']->getName();
+}
+  
+  

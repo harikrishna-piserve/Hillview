@@ -19,7 +19,12 @@
         "drupal/core-composer-scaffold": "^9.3",
         "drupal/core-project-message": "^9.3",
         "drupal/core-recommended": "^9.3",
-        "drupal/core-vendor-hardening": "^9.3"
+        "drupal/core-vendor-hardening": "^9.3",
+        "drupal/features": "^3.12",
+        "drupal/form_mode_manager": "^2.0@RC",
+        "drupal/views_bulk_operations": "^4.0",
+        "drupal/views_conditional": "^1.4",
+        "drupal/webform": "^6.1"
     },
     "conflict": {
         "drupal/drupal": "*"

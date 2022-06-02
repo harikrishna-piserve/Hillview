@@ -1,0 +1,101 @@
+# Asset routing definition
+
+entity.asset.canonical:
+  route_name: entity.asset.canonical
+  base_route: entity.asset.canonical
+  title: 'View'
+
+entity.asset.edit_form:
+  route_name: entity.asset.edit_form
+  base_route: entity.asset.canonical
+  title: 'Edit'
+
+entity.asset.version_history:
+  route_name: entity.asset.version_history
+  base_route: entity.asset.canonical
+  title: 'Revisions'
+
+entity.asset.delete_form:
+  route_name:  entity.asset.delete_form
+  base_route:  entity.asset.canonical
+  title: Delete
+  weight: 10
+
+# Assignation routing definition
+assignation.settings_tab:
+  route_name: assignation.settings
+  title: 'Settings'
+  base_route: assignation.settings
+
+entity.assignation.canonical:
+  route_name: entity.assignation.canonical
+  base_route: entity.assignation.canonical
+  title: 'View'
+
+entity.assignation.edit_form:
+  route_name: entity.assignation.edit_form
+  base_route: entity.assignation.canonical
+  title: 'Edit'
+
+entity.assignation.version_history:
+  route_name: entity.assignation.version_history
+  base_route: entity.assignation.canonical
+  title: 'Revisions'
+
+entity.assignation.delete_form:
+  route_name:  entity.assignation.delete_form
+  base_route:  entity.assignation.canonical
+  title: Delete
+  weight: 10
+# Maintenance record routing definition
+maintenance_record.settings_tab:
+  route_name: maintenance_record.settings
+  title: 'Settings'
+  base_route: maintenance_record.settings
+
+entity.maintenance_record.canonical:
+  route_name: entity.maintenance_record.canonical
+  base_route: entity.maintenance_record.canonical
+  title: 'View'
+
+entity.maintenance_record.edit_form:
+  route_name: entity.maintenance_record.edit_form
+  base_route: entity.maintenance_record.canonical
+  title: 'Edit'
+
+entity.maintenance_record.version_history:
+  route_name: entity.maintenance_record.version_history
+  base_route: entity.maintenance_record.canonical
+  title: 'Revisions'
+
+entity.maintenance_record.delete_form:
+  route_name:  entity.maintenance_record.delete_form
+  base_route:  entity.maintenance_record.canonical
+  title: Delete
+  weight: 10
+# Vendor record routing definition
+vendor_record.settings_tab:
+  route_name: vendor_record.settings
+  title: 'Settings'
+  base_route: vendor_record.settings
+
+entity.vendor_record.canonical:
+  route_name: entity.vendor_record.canonical
+  base_route: entity.vendor_record.canonical
+  title: 'View'
+
+entity.vendor_record.edit_form:
+  route_name: entity.vendor_record.edit_form
+  base_route: entity.vendor_record.canonical
+  title: 'Edit'
+
+entity.vendor_record.version_history:
+  route_name: entity.vendor_record.version_history
+  base_route: entity.vendor_record.canonical
+  title: 'Revisions'
+
+entity.vendor_record.delete_form:
+  route_name:  entity.vendor_record.delete_form
+  base_route:  entity.vendor_record.canonical
+  title: Delete
+  weight: 10

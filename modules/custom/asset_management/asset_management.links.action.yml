@@ -1,0 +1,25 @@
+entity.asset.add_form:
+  route_name: entity.asset.add_page
+  title: 'Add Asset'
+  appears_on:
+    - entity.asset.collection
+entity.asset_type.add_form:
+  route_name: entity.asset_type.add_form
+  title: 'Add Asset type'
+  appears_on:
+    - entity.asset_type.collection
+entity.assignation.add_form:
+  route_name: entity.assignation.add_form
+  title: 'Add Assignation'
+  appears_on:
+    - entity.assignation.collection
+entity.maintenance_record.add_form:
+  route_name: entity.maintenance_record.add_form
+  title: 'Add Maintenance record'
+  appears_on:
+    - entity.maintenance_record.collection
+entity.vendor_record.add_form:
+  route_name: entity.vendor_record.add_form
+  title: 'Add Vendor record'
+  appears_on:
+    - entity.vendor_record.collection

@@ -1,0 +1,82 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.assignation.assignation.field_assigned_on
+    - field.field.assignation.assignation.field_comments
+    - field.field.assignation.assignation.field_returned_on
+  module:
+    - asset_management
+    - datetime
+id: assignation.assignation.default
+targetEntityType: assignation
+bundle: assignation
+mode: default
+content:
+  asset_id:
+    type: options_select
+    weight: 5
+    settings: {  }
+    region: content
+    third_party_settings: {  }
+  asset_type:
+    type: options_select
+    weight: -4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  assignation_status:
+    type: options_buttons
+    weight: -4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  assignee:
+    type: entity_reference_autocomplete
+    weight: -4
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_assigned_on:
+    weight: 26
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_comments:
+    weight: 28
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_returned_on:
+    weight: 27
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  request_comment:
+    type: string_textfield
+    weight: -4
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  user_id:
+    type: entity_reference_autocomplete
+    weight: 5
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+      match_limit: 10
+    region: content
+    third_party_settings: {  }
+hidden: {  }

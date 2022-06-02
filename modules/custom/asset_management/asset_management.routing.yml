@@ -1,0 +1,61 @@
+asset_management.form:
+ path: '/Asset-Request'
+ defaults:
+   _title: 'Asset Request form'
+   _form: '\Drupal\asset_management\Form\AssetRequestForm'
+ requirements:
+   _permission: 'access content'
+
+asset_management.asset_block_controller_hello:
+  path: '/asset_management/hello/{id}'
+  defaults:
+    _controller: '\Drupal\asset_management\Controller\AssetBlockController::hello'
+    _title: 'blockAsset'
+  requirements:
+    _permission: 'access content'
+asset_management.asset_block_form:
+  path: '/asset_management/form/asset_block/{id}'
+  defaults:
+    _form: '\Drupal\asset_management\Form\AssetBlockForm'
+    _title: 'AssetBlockForm'
+  requirements:
+    _access: 'TRUE'
+
+asset_management.asset_list:
+  path: '/asset-view'
+
+asset_management.assignation_list:
+  path: '/assignation-view'
+
+asset_management.maintenance_list:
+  path: '/maintenance-record'
+
+asset_management.vendors_list:
+  path: '/vendors'
+
+asset_management.assignee_view:
+  path: '/assignee-view'
+
+asset_management.unique_id_prefix_form:
+  path: '/admin/config/asset_management/uniqueidprefix'
+  defaults:
+    _form: '\Drupal\asset_management\Form\UniqueIdPrefixForm'
+    _title: 'UniqueIdPrefixForm'
+  requirements:
+    _permission: 'access administration pages'
+  options:
+    _admin_route: TRUE
+asset_management.repair_request_form:
+  path: '/repair_request'
+  defaults:
+    _form: '\Drupal\asset_management\Form\RepairRequestForm'
+    _title: 'Repair Request Form'
+  requirements:
+    _access: 'TRUE'
+asset_management.create_asset_form:
+  path: '/asset/create'
+  defaults:
+    _form: '\Drupal\asset_management\Form\AssetCreateForm'
+    _title: 'Create Asset Form'
+  requirements:
+    _access: 'TRUE'

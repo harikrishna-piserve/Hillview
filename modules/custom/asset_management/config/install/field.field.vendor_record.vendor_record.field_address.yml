@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.vendor_record.field_address
+  module:
+    - asset_management
+id: vendor_record.vendor_record.field_address
+field_name: field_address
+entity_type: vendor_record
+bundle: vendor_record
+label: Address
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

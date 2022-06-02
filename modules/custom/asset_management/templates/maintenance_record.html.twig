@@ -1,0 +1,22 @@
+{#
+/**
+ * @file maintenance_record.html.twig
+ * Default theme implementation to present Maintenance record data.
+ *
+ * This template is used when viewing Maintenance record pages.
+ *
+ *
+ * Available variables:
+ * - content: A list of content items. Use 'content' to print all content, or
+ * - attributes: HTML attributes for the container element.
+ *
+ * @see template_preprocess_maintenance_record()
+ *
+ * @ingroup themeable
+ */
+#}
+<div{{ attributes.addClass('maintenance_record') }}>
+  {% if content %}
+    {{- content -}}
+  {% endif %}
+</div>

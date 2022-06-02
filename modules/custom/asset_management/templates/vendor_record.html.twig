@@ -1,0 +1,22 @@
+{#
+/**
+ * @file vendor_record.html.twig
+ * Default theme implementation to present Vendor record data.
+ *
+ * This template is used when viewing Vendor record pages.
+ *
+ *
+ * Available variables:
+ * - content: A list of content items. Use 'content' to print all content, or
+ * - attributes: HTML attributes for the container element.
+ *
+ * @see template_preprocess_vendor_record()
+ *
+ * @ingroup themeable
+ */
+#}
+<div{{ attributes.addClass('vendor_record') }}>
+  {% if content %}
+    {{- content -}}
+  {% endif %}
+</div>

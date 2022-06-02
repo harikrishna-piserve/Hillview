@@ -1,0 +1,127 @@
+add asset entities:
+  title: 'Create new Asset entities'
+
+administer asset entities:
+  title: 'Administer Asset entities'
+  description: 'Allow to access the administration form to configure Asset entities.'
+  restrict access: true
+
+delete asset entities:
+  title: 'Delete Asset entities'
+
+edit asset entities:
+  title: 'Edit Asset entities'
+
+view published asset entities:
+  title: 'View published Asset entities'
+
+view unpublished asset entities:
+  title: 'View unpublished Asset entities'
+
+view all asset revisions:
+  title: 'View all Asset revisions'
+
+revert all asset revisions:
+  title: 'Revert all Asset revisions'
+  description: 'Role requires permission <em>view Asset revisions</em> and <em>edit rights</em> for asset entities in question or <em>administer asset entities</em>.'
+
+delete all asset revisions:
+  title: 'Delete all revisions'
+  description: 'Role requires permission to <em>view Asset revisions</em> and <em>delete rights</em> for asset entities in question or <em>administer asset entities</em>.'
+
+permission_callbacks:
+  - \Drupal\asset_management\AssetPermissions::generatePermissions
+add assignation entities:
+  title: 'Create new Assignation entities'
+
+administer assignation entities:
+  title: 'Administer Assignation entities'
+  description: 'Allow to access the administration form to configure Assignation entities.'
+  restrict access: true
+
+delete assignation entities:
+  title: 'Delete Assignation entities'
+
+edit assignation entities:
+  title: 'Edit Assignation entities'
+
+view published assignation entities:
+  title: 'View published Assignation entities'
+
+view unpublished assignation entities:
+  title: 'View unpublished Assignation entities'
+
+view all assignation revisions:
+  title: 'View all Assignation revisions'
+
+revert all assignation revisions:
+  title: 'Revert all Assignation revisions'
+  description: 'Role requires permission <em>view Assignation revisions</em> and <em>edit rights</em> for assignation entities in question or <em>administer assignation entities</em>.'
+
+delete all assignation revisions:
+  title: 'Delete all revisions'
+  description: 'Role requires permission to <em>view Assignation revisions</em> and <em>delete rights</em> for assignation entities in question or <em>administer assignation entities</em>.'
+
+
+add maintenance record entities:
+  title: 'Create new Maintenance record entities'
+
+administer maintenance record entities:
+  title: 'Administer Maintenance record entities'
+  description: 'Allow to access the administration form to configure Maintenance record entities.'
+  restrict access: true
+
+delete maintenance record entities:
+  title: 'Delete Maintenance record entities'
+
+edit maintenance record entities:
+  title: 'Edit Maintenance record entities'
+
+view published maintenance record entities:
+  title: 'View published Maintenance record entities'
+
+view unpublished maintenance record entities:
+  title: 'View unpublished Maintenance record entities'
+
+view all maintenance record revisions:
+  title: 'View all Maintenance record revisions'
+
+revert all maintenance record revisions:
+  title: 'Revert all Maintenance record revisions'
+  description: 'Role requires permission <em>view Maintenance record revisions</em> and <em>edit rights</em> for maintenance record entities in question or <em>administer maintenance record entities</em>.'
+
+delete all maintenance record revisions:
+  title: 'Delete all revisions'
+  description: 'Role requires permission to <em>view Maintenance record revisions</em> and <em>delete rights</em> for maintenance record entities in question or <em>administer maintenance record entities</em>.'
+
+add vendor record entities:
+  title: 'Create new Vendor record entities'
+
+administer vendor record entities:
+  title: 'Administer Vendor record entities'
+  description: 'Allow to access the administration form to configure Vendor record entities.'
+  restrict access: true
+
+delete vendor record entities:
+  title: 'Delete Vendor record entities'
+
+edit vendor record entities:
+  title: 'Edit Vendor record entities'
+
+view published vendor record entities:
+  title: 'View published Vendor record entities'
+
+view unpublished vendor record entities:
+  title: 'View unpublished Vendor record entities'
+
+view all vendor record revisions:
+  title: 'View all Vendor record revisions'
+
+revert all vendor record revisions:
+  title: 'Revert all Vendor record revisions'
+  description: 'Role requires permission <em>view Vendor record revisions</em> and <em>edit rights</em> for vendor record entities in question or <em>administer vendor record entities</em>.'
+
+delete all vendor record revisions:
+  title: 'Delete all revisions'
+  description: 'Role requires permission to <em>view Vendor record revisions</em> and <em>delete rights</em> for vendor record entities in question or <em>administer vendor record entities</em>.'
+

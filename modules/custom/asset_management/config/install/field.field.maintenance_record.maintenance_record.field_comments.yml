@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.maintenance_record.field_comments
+  module:
+    - asset_management
+id: maintenance_record.maintenance_record.field_comments
+field_name: field_comments
+entity_type: maintenance_record
+bundle: maintenance_record
+label: Comments
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

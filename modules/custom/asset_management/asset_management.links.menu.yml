@@ -1,0 +1,66 @@
+
+# Asset menu items definition
+entity.asset.collection:
+  title: 'Asset list'
+  route_name: entity.asset.collection
+  description: 'List Asset entities'
+  parent: system.admin_structure
+  weight: 100
+
+
+# Asset type menu items definition
+entity.asset_type.collection:
+  title: 'Asset type'
+  route_name: entity.asset_type.collection
+  description: 'List Asset type (bundles)'
+  parent: system.admin_structure
+  weight: 99
+
+# Assignation menu items definition
+entity.assignation.collection:
+  title: 'Assignation list'
+  route_name: entity.assignation.collection
+  description: 'List Assignation entities'
+  parent: system.admin_structure
+  weight: 100
+
+assignation.admin.structure.settings:
+  title: 'Assignation settings'
+  description: 'Configure Assignation entities'
+  route_name: assignation.settings
+  parent: system.admin_structure
+
+asset_management.unique_id_prefix_form:
+  title: 'Prefix Id'
+  route_name: asset_management.unique_id_prefix_form
+  description: 'A description for the menu entry'
+  parent: system.admin_config_system
+  weight: 99
+
+# Maintenance record menu items definition
+entity.maintenance_record.collection:
+  title: 'Maintenance record list'
+  route_name: entity.maintenance_record.collection
+  description: 'List Maintenance record entities'
+  parent: system.admin_structure
+  weight: 100
+
+maintenance_record.admin.structure.settings:
+  title: 'Maintenance record settings'
+  description: 'Configure Maintenance record entities'
+  route_name: maintenance_record.settings
+  parent: system.admin_structure
+
+# Vendor record menu items definition
+entity.vendor_record.collection:
+  title: 'Vendor record list'
+  route_name: entity.vendor_record.collection
+  description: 'List Vendor record entities'
+  parent: system.admin_structure
+  weight: 100
+
+vendor_record.admin.structure.settings:
+  title: 'Vendor record settings'
+  description: 'Configure Vendor record entities'
+  route_name: vendor_record.settings
+  parent: system.admin_structure
